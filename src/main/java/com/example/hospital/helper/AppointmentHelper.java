@@ -4,6 +4,8 @@ package com.example.hospital.helper;
 import com.example.hospital.entity.Appointment;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.web.multipart.MultipartFile;
@@ -16,7 +18,7 @@ import java.util.List;
 
 public class AppointmentHelper{
         public static String TYPE = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
-//    static String SHEET = "patient2";
+
 
         public static boolean checkExcelFormatOfAppointment(MultipartFile file)
         {
@@ -28,13 +30,13 @@ public class AppointmentHelper{
             return true;
         }
 
-        //converts excel to list of patients
+
         public static List<Appointment> convertExcelToListOfAppointment(InputStream is)
         {
             try
             {
-                XSSFWorkbook workbook= new XSSFWorkbook(is);
-                XSSFSheet sheet= workbook.getSheetAt(0);
+                Workbook workbook= new XSSFWorkbook(is);
+                Sheet sheet= workbook.getSheetAt(0);
 
                 Iterator<Row> rows=sheet.iterator();
                 List<Appointment>list=new ArrayList<Appointment>();
@@ -58,7 +60,7 @@ public class AppointmentHelper{
                         switch (cid)
                         {
                             case 0:
-                                appointment.setPatient_id(currentCell.getStringCellValue());
+//                                appointment.setPatient_id(currentCell.getStringCellValue());
                                 break;
                             case 1:
                                 appointment.setAppointment_date(currentCell.getDateCellValue());
@@ -96,7 +98,7 @@ public class AppointmentHelper{
             catch ( IOException e)
             {
                 throw new RuntimeException("fail to parse Excel file: " + e.getMessage());
-//            e.printStackTrace();
+
             }
 
         }

@@ -16,11 +16,8 @@ import java.util.List;
 
 public class MyExcelHelper {
     public static String TYPE = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
-//    static String SHEET = "patient2";
-
     public static boolean checkExcelFormat(MultipartFile file)
     {
-
         if (!TYPE.equals(file.getContentType())) {
             return false;
         }
@@ -93,7 +90,7 @@ public class MyExcelHelper {
              list.add(p);
          }
 workbook.close();
-//            list.forEach(l-> System.out.println(l.toString()));
+
          return list;
         }
         catch (IOException e)

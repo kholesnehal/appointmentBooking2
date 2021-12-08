@@ -5,7 +5,6 @@ import com.example.hospital.entity.Patient;
 import com.example.hospital.helper.AppointmentHelper;
 import com.example.hospital.helper.MyExcelHelper;
 import com.example.hospital.repo.AppointmentRepo;
-import com.example.hospital.repo.PatientRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -20,7 +19,6 @@ public class AppointmentService {
 
     public void save(MultipartFile file) {
         try {
-//
             List<Appointment> appointments= AppointmentHelper.convertExcelToListOfAppointment(file.getInputStream());
             appointmentRepo.saveAll(appointments);
         } catch ( IOException e) {
@@ -35,6 +33,7 @@ public class AppointmentService {
     {
         return appointmentRepo.save(appointment);
     }
+
     public Appointment updateAppointment(Appointment appointment) {
         Appointment update = appointmentRepo.findByAppointmentId(appointment.getAppointment_id());
         update.setAppointment_status(appointment.getAppointment_status());
