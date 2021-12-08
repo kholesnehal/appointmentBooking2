@@ -8,10 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
 import java.util.List;
-import java.util.Map;
-
 @RestController
 public class PatientController {
     @Autowired
@@ -27,7 +24,6 @@ public ResponseEntity<ResponseMessage> uploadFile(@RequestParam("file") Multipar
     if (MyExcelHelper.checkExcelFormat(file))
     {
         try {
-            System.out.println("30");
             patientService.save(file);
             message = "Uploaded the file successfully: " + file.getOriginalFilename();
             return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(message));
